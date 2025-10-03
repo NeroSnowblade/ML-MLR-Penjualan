@@ -1,0 +1,6 @@
+0. Sistem Prediksi Per Variabel
+1. Login dan Register
+2. Paging Table Data
+3. Print / Show Prediction Result
+
+DL : 01 Oct 2025
