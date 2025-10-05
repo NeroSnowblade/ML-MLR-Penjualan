@@ -1,0 +1,1 @@
+<!-- Chart is rendered in feature_selector.php -->

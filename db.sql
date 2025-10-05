@@ -2,6 +2,20 @@
 CREATE DATABASE IF NOT EXISTS sales_prediction;
 USE sales_prediction;
 
+-- Create users table
+CREATE TABLE IF NOT EXISTS users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    full_name VARCHAR(100) NOT NULL,
+    role ENUM('admin', 'user') DEFAULT 'user',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    last_login TIMESTAMP NULL,
+    is_active TINYINT(1) DEFAULT 1
+);
+
 -- Create sales_data table
 CREATE TABLE IF NOT EXISTS sales_data (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -20,11 +34,17 @@ CREATE TABLE IF NOT EXISTS sales_data (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Create index for better performance
+-- Create indexes for better performance
+CREATE INDEX idx_username ON users(username);
+CREATE INDEX idx_email ON users(email);
 CREATE INDEX idx_date ON sales_data(date);
 CREATE INDEX idx_omset ON sales_data(omset);
 
--- Sample data for testing (optional)
+-- Insert default admin user (password: admin123)
+INSERT INTO users (username, password, email, full_name, role) VALUES
+('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin@example.com', 'Administrator', 'admin');
+
+-- Sample data for testing sales_data (optional)
 INSERT INTO sales_data (date, item_sales, void, discount_bill, discount_item, amount_redeem, net_sales, gross_sales, pembayaran_dp, omset, average_sales) VALUES
 ('2024-01-01', 150, 5, 10000, 5000, 2000, 280000, 300000, 50000, 320000, 2133),
 ('2024-01-02', 120, 3, 8000, 4000, 1500, 220000, 240000, 40000, 250000, 2083),
