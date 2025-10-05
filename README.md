@@ -1,14 +1,15 @@
 # Sistem Prediksi Penjualan dengan Multiple Linear Regression
 
-Aplikasi web PHP native yang menggunakan algoritma Multiple Linear Regression untuk memprediksi penjualan berdasarkan data historis. Aplikasi ini dilengkapi dengan fitur import Excel dan visualisasi grafik.
+Aplikasi web PHP native yang menggunakan algoritma Multiple Linear Regression untuk memprediksi penjualan berdasarkan data historis. Aplikasi ini dilengkapi dengan fitur import Excel, visualisasi grafik, dan tabel interaktif dengan paging.
 
 ## Fitur Utama
 
-- 📊 **Import Data Excel** - Import data penjualan dari file Excel (.xlsx/.xls)
-- 🤖 **Multiple Linear Regression** - Algoritma prediksi penjualan yang akurat
-- 📈 **Visualisasi Grafik** - Grafik perbandingan data aktual vs prediksi
-- 📋 **Tabel Data** - Tampilan detail data dengan perhitungan akurasi
-- 🎨 **Bootstrap UI** - Interface yang responsive dan modern
+- **Import Data Excel** - Import data penjualan dari file Excel (.xlsx/.xls)
+- **Multiple Linear Regression** - Algoritma prediksi penjualan menggunakan PHP-ML
+- **Visualisasi Grafik** - Grafik perbandingan data aktual vs prediksi
+- **Tabel Data** - Tampilan detail data dengan perhitungan akurasi dan paging
+- **Bootstrap UI & Custom Theme** - Interface yang responsive dan modern
+- **Paging & Counter** - Tabel data dengan fitur paging dan nomor baris
 
 ## Struktur Data
 
@@ -27,7 +28,7 @@ Aplikasi ini menggunakan data dengan kolom:
 
 ## Instalasi
 
-### Prerequisites
+### Prasyarat
 - PHP 7.4 atau lebih baru
 - MySQL 5.7 atau lebih baru
 - Composer
@@ -38,7 +39,7 @@ Aplikasi ini menggunakan data dengan kolom:
 1. **Clone atau Download Project**
    ```bash
    git clone [repository-url]
-   cd sales-prediction-app
+   cd ML-MLR
    ```
 
 2. **Install Dependencies dengan Composer**
@@ -48,13 +49,13 @@ Aplikasi ini menggunakan data dengan kolom:
 
 3. **Setup Database**
    - Buat database MySQL baru
-   - Import file `database_setup.sql` ke database Anda
+   - Import file `db.sql` ke database Anda
    ```bash
-   mysql -u root -p sales_prediction < database_setup.sql
+   mysql -u root -p sales_prediction < db.sql
    ```
 
 4. **Konfigurasi Database**
-   Edit konfigurasi database di file `index.php`:
+   Edit konfigurasi database di file `config.php`:
    ```php
    $host = 'localhost';
    $dbname = 'sales_prediction';
@@ -64,7 +65,7 @@ Aplikasi ini menggunakan data dengan kolom:
 
 5. **Jalankan Aplikasi**
    - Tempatkan folder project di web server directory (htdocs/www)
-   - Akses melalui browser: `http://localhost/sales-prediction-app`
+   - Akses melalui browser: `http://localhost/ML-MLR`
 
 ## Cara Penggunaan
 
@@ -77,7 +78,7 @@ Aplikasi ini menggunakan data dengan kolom:
 ### 2. Melihat Prediksi
 - Setelah data diimport, sistem akan otomatis menghitung prediksi
 - Grafik akan menampilkan perbandingan data aktual vs prediksi
-- Tabel akan menunjukkan detail akurasi per data
+- Tabel akan menunjukkan detail akurasi per data dan dapat dipaging
 
 ### 3. Analisis Hasil
 - **Grafik Line Chart**: Visualisasi trend aktual vs prediksi
@@ -96,28 +97,60 @@ Pastikan file Excel Anda memiliki struktur sebagai berikut:
 
 - **Backend**: PHP 7.4+ Native
 - **Database**: MySQL
-- **Frontend**: Bootstrap 5.1.3
+- **Frontend**: Bootstrap 5.1.3 + Custom CSS
 - **Charts**: Chart.js
 - **Excel Processing**: PhpSpreadsheet
-- **Algoritma**: Multiple Linear Regression (implementasi custom)
+- **Algoritma**: Multiple Linear Regression (PHP-ML)
+- **Tabel Interaktif**: DataTables
 
 ## Algoritma Multiple Linear Regression
 
 Aplikasi ini mengimplementasikan Multiple Linear Regression dengan:
 - **9 variabel independen**: Item Sales, Void, Discount Bill, Discount Item, Amount Redeem, Net Sales, Gross Sales, Pembayaran DP, Average Sales
 - **1 variabel dependen**: Omset
-- **Metode**: Normal Equation (β = (X'X)⁻¹X'y)
+- **Library**: PHP-ML (LeastSquares Regression)
 - **Evaluasi**: Mean Absolute Percentage Error (MAPE)
 
-## File Structure
+## Struktur Folder
 
 ```
-sales-prediction-app/
-├── index.php              # Main application file
-├── composer.json           # Composer dependencies
-├── database_setup.sql      # Database schema and sample data
-├── README.md              # Documentation
-└── vendor/                # Composer dependencies (after install)
+ML-MLR/
+├── auth_check.php
+├── composer.json
+├── composer.lock
+├── config.php
+├── db.sql
+├── index.php
+├── login.php
+├── logout.php
+├── process_index.php
+├── process_slr.php
+├── project_structure.md
+├── README.md
+├── register.php
+├── SLR.php
+├── todolist.txt
+├── assets/
+│   └── style.css
+├── includes/
+│   ├── alert.php
+│   ├── chart_multiple.php
+│   ├── chart_script_multiple.php
+│   ├── chart_script_slr.php
+│   ├── chart_slr.php
+│   ├── empty_state.php
+│   ├── feature_selector.php
+│   ├── footer.php
+│   ├── navbar_slr.php
+│   ├── navbar.php
+│   ├── predict_form_multiple.php
+│   ├── predict_form_slr.php
+│   ├── sidebar_multiple.php
+│   ├── sidebar_slr.php
+│   ├── table_multiple.php
+│   └── table_slr.php
+├── vendor/
+│   └── ... (Composer dependencies)
 ```
 
 ## Troubleshooting
@@ -132,8 +165,8 @@ sales-prediction-app/
 - Periksa format tanggal (gunakan format date Excel standar)
 - Pastikan semua kolom terisi dengan data numerik (kecuali tanggal)
 
-### Grafik tidak muncul
-- Periksa koneksi internet (Chart.js dari CDN)
+### Grafik atau Tabel tidak muncul
+- Periksa koneksi internet (Chart.js & DataTables dari CDN)
 - Pastikan ada minimal 2 data untuk membuat prediksi
 - Check browser console untuk error JavaScript
 
