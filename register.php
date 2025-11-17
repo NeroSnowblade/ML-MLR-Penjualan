@@ -7,7 +7,7 @@ if (isset($_SESSION['user_id'])) {
     exit();
 }
 
-require_once 'config.php';
+require_once './config.php';
 
 $error = '';
 $success = '';
@@ -50,8 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // Insert new user
                     $stmt = $pdo->prepare("INSERT INTO users (username, password, email, full_name, role) VALUES (?, ?, ?, ?, 'user')");
                     $stmt->execute([$username, $hashed_password, $email, $full_name]);
-                    
-                    $success = 'Registrasi berhasil! Silakan login.';
+
+                    // Setelah registrasi berhasil, langsung redirect ke halaman login
+                    header('Location: login.php');
+                    exit();
                 }
             }
         } catch (PDOException $e) {

@@ -2,9 +2,9 @@
 // process_index.php - Business Logic untuk Multiple Linear Regression
 
 session_start();
-require_once 'auth_check.php';
-require_once 'config.php';
-require_once 'vendor/autoload.php';
+require_once './auth_check.php';
+require_once './config.php';
+require_once './vendor/autoload.php';
 
 use Phpml\Regression\LeastSquares;
 
