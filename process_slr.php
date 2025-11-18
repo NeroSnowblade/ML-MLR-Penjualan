@@ -30,8 +30,9 @@ if (isset($_POST['import_excel']) && isset($_FILES['excel_file'])) {
             $net_sales = (int)$worksheet->getCell('G' . $row)->getValue();
             $gross_sales = (int)$worksheet->getCell('H' . $row)->getValue();
             $pembayaran_dp = (int)$worksheet->getCell('I' . $row)->getValue();
-            $omset = (int)$worksheet->getCell('J' . $row)->getValue();
-            $average_sales = (int)$worksheet->getCell('K' . $row)->getValue();
+            $gratuity_dp = (int)$worksheet->getCell('J' . $row)->getValue();
+            $omset = (int)$worksheet->getCell('K' . $row)->getValue();
+            $average_sales = (int)$worksheet->getCell('L' . $row)->getValue();
             
             if (empty($date) && empty($item_sales) && empty($omset)) continue;
             if ($date == 'TOTAL') continue;

@@ -2,20 +2,20 @@
 // Database configuration
 
 // [Local]
-// $host = 'localhost';
-// $dbname = 'sales_prediction';
-// $username = 'root';
-// $password = '';
-// $port = '3306';
-// $charset = 'utf8mb4';
-
-// [InfinityFree]
-$host = 'sql213.infinityfree.com';
-$dbname = 'if0_40096945_sales_prediction';
-$username = 'if0_40096945';
-$password = 'gjfIeQLSCdTz4';
+$host = 'localhost';
+$dbname = 'sales_prediction';
+$username = 'root';
+$password = '';
 $port = '3306';
 $charset = 'utf8mb4';
+
+// [InfinityFree]
+// $host = 'sql213.infinityfree.com';
+// $dbname = 'if0_40096945_sales_prediction';
+// $username = 'if0_40096945';
+// $password = 'gjfIeQLSCdTz4';
+// $port = '3306';
+// $charset = 'utf8mb4';
 
 $dsn = "mysql:host={$host};port={$port};dbname={$dbname};charset={$charset}";
 try {
